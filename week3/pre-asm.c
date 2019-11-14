@@ -18,7 +18,7 @@ top:
     // This if condition is used to clarify the input number is in range or not.
     // If not, it will show the text inside the printf command.
     if ( input <= 0 || input > 15) {
-        printf ( "Wrong number\n" );
+        printf ( "Wrong number\n" ); 
         goto top;
     }
     // This is the big loop for repeat rows of pyramid until it equals to input number.
@@ -26,7 +26,7 @@ top:
     for ( i = 1 ; i <= input ; i++ ){
 
         // This loop print blank space based on formula space=input-1.
-        for (space = 0 ; space < (input-i); space ++) { 
+        for (space = 0 ; space < (input-i); space ++) {
             printf("\t");
         }
 
