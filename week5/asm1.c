@@ -1,47 +1,38 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include <string.h>
 int main() {
     int right;
     while( right !=1 ){
-            char isbn[30];
+            char isbn[30] = "" ,isbnfake[30];
             unsigned long int isbn1, isbn2, isbn3, isbn4, isbn5;
-            char isbn2str[5], isbn3str[7], isbn4str[6], isbn5str[2];
+            char isbn2str[8], isbn3str[8], isbn4str[8], isbn5str[8]; //Each element size is 8 because
             int number=0, hyphen=0;
             char isbnwithouthyphen[30];
             int j=0, problem=0, wrong = 0;
         // scanf the value in int and string type.
             printf ( " Enter an ISBN: ");
             scanf ( "%s" , isbn ); // Scan the whole string contained numbers as char type and hyphens
-            sscanf ( isbn  , "%ld-%ld-%ld-%ld-%ld" , &isbn1, &isbn2, &isbn3, &isbn4, &isbn5); // Scan each group of element as int type which seperated by hyphens.
-            sprintf ( isbn2str , "%ld" , isbn2 );
-            sprintf ( isbn3str , "%ld" , isbn3 );
-            sprintf ( isbn4str , "%ld" , isbn4 );
-            sprintf ( isbn5str , "%ld" , isbn5 );
-        // 1.
-            for ( int i=0 ; i <= 17  ; i ++ ) {
+        // Cancel Function.
+            if ( *isbn == '0' && strlen ( isbn ) == 1) {
+                printf(" Program exits. Goodbye!!!\n" ); break;
+            }
+
+            for ( int i=0 ; i < strlen(isbn)  ; i ++ ) {
                 if ( isdigit ( isbn[i] ) ) {
                     number ++ ;
                     isbnwithouthyphen[j] = isbn[i] ;
                     j++ ;
-                }
-                if ( isbn[i] == '-' ){
-                    hyphen += 1 ;
+                } else if ( isbn[i] == '-' ) {
+                    hyphen ++ ;
                 }
             }
-        /////////////////////////SYNTAX ERRRR////////////////////////
-            int i =0 ;
-            while ( i <= ( strlen( isbn ) - 1 ) ) {
-                if ( isbn[i] != '-' ) {
-                    if (  isdigit ( isbn[i] ) == 0 ) {
-                        printf ( " Invalid ISBN. Input should only contain digits and hyphens.\n" );
-                        printf("%d %c \n", i, isbn[i] );
-                        wrong = 1 ;
-                        break ;
-                        }
-                } i ++ ;
+            if ( number + hyphen != strlen(isbn) ) {
+                printf ( " Invalid ISBN. Input should only contain digit s and hyphens.\n" );
+                continue ;
+            }
 
-             }
             if ( wrong == 1 ) {
                 continue;
             }
@@ -60,6 +51,12 @@ int main() {
                 continue ;
             }
         // Condition check if there is strange character
+            sscanf ( isbn  , "%ld-%ld-%ld-%ld-%ld" , &isbn1, &isbn2, &isbn3, &isbn4, &isbn5); // Scan each group of element as int type which seperated by hyphens.
+            sprintf ( isbn2str , "%ld" , isbn2 );
+            sprintf ( isbn3str , "%ld" , isbn3 );
+            sprintf ( isbn4str , "%ld" , isbn4 );
+            sprintf ( isbn5str , "%ld" , isbn5 );
+
 
         // 13 numbers condition
             if ( number < 13 ) {
@@ -103,12 +100,11 @@ int main() {
             }
 
             if (sum%10 !=0) {
-                printf("%ld\n", sum);
                 printf ( " Invalid ISBN. Failed validation test.\n" ); continue; }
 
         // Output if the ISBN number is valid.
-            printf ( "Valid ISBN. \n" );
-            right = 1;
+            printf ( " Valid ISBN. \n" );
+            break;
         }
     return 0;
 
