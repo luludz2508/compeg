@@ -11,12 +11,12 @@ void pointshow(point test){
 }
 
 double pointdist(point pnt1, point pnt2){
-  return sqrt(pow(pnt1.x-pnt2.x,2)+ pow(pnt1.y-pnt2.y,2));  
+  return sqrt(pow(pnt1.x-pnt2.x,2)+ pow(pnt1.y-pnt2.y,2));
 }
 
 int main(int argc, char const *argv[]) {
-  point test= {.25, .75};
-  point test2= {.35, .45};
+  point test= {3,0};
+  point test2= {0,3};
   // pointshow(test);
 
   printf("Length is : %lf\n", pointdist(test,test2));
